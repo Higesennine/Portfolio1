@@ -14,6 +14,7 @@ export default function ProductContainer() {
         };
         getProducts();
     }, [])
+    
     return (
         <div className='productContainer'>
             <li>
