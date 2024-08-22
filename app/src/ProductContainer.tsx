@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAllProducts } from './services/supabaseFunction';
+
+
 
 export default function ProductContainer() {
+    const [products, setProducts] = useState<any>([]);
+
+    useEffect(() => {
+        const getProducts = async () => {
+            const products = await getAllProducts();
+            setProducts(products);
+            console.log(products);
+        };
+        getProducts();
+    }, [])
     return (
         <div className='productContainer'>
             <li>
