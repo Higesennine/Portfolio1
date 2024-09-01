@@ -12,8 +12,8 @@ function App() {
         </form>
       </header>
       <main className='main'>
-        <div className='Container'>
-          <input type="text" placeholder='Search Products' />
+        <div className='container'>
+          <input type="text" id='searchBox' placeholder='Search Products...' />
           <ul>
           <ProductContainer />
           </ul>
