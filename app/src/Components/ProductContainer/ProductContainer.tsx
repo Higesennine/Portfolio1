@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { getAllProducts } from './services/supabaseFunction';
-import './ProductContainer.css';
+import './ProductContainer.scss';
+import { Product } from '../../App';
 
+type Props = {
+    products: Product[]
+}
 
+type CartProduct = {
+    id: number,
+    name: string,
+    image_url: string
+}
 
-export default function ProductContainer() {
-    type Product = {
-        id: number,
-        name: string,
-        image_url: string
-    }
-    
-    type CartProduct = {
-        id: number,
-        name: string,
-        image_url: string
-    }
+export default function ProductContainer({products}: Props) {
 
-    const [products, setProducts] = useState<Product[]>([]);
     const [currentCart, setCart] = useState<CartProduct[]>([]);
 
-    useEffect(() => {
-        const getProducts = async () => {
-            const products = await getAllProducts();
-            setProducts(products!);
-            console.log(products);
-        };
-        getProducts();
-    }, [])
 //handleCartを使ってcurrentCartに商品を入れるところまで終わった
 //次にやりたいことはcurrentCartの中身をレンダリング。でも別のコンポーネント内でする必要がある
+
     const handleCart = (addedProduct:any) => {
         setCart([...currentCart, addedProduct]);
     }
