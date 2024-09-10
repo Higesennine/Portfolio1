@@ -3,38 +3,20 @@ import './ProductContainer.scss';
 import { Product } from '../../App';
 
 type Props = {
-    products: Product[]
+    products: Product[],
+    addToCart: (addedProduct: Product) => void
 }
 
-type CartProduct = {
-    id: number,
-    name: string,
-    image_url: string
-}
-
-export default function ProductContainer({products}: Props) {
-
-    const [currentCart, setCart] = useState<CartProduct[]>([]);
-
-//handleCartを使ってcurrentCartに商品を入れるところまで終わった
-//次にやりたいことはcurrentCartの中身をレンダリング。でも別のコンポーネント内でする必要がある
-
-    const handleCart = (addedProduct:any) => {
-        setCart([...currentCart, addedProduct]);
-    }
-
-    useEffect(() => {
-        console.log("Cart:", currentCart);
-    }, [currentCart]);
+export default function ProductContainer({products, addToCart}: Props) {
 
     return (
         <div className='productContainer'>
-            {products.map((product: { id: React.Key, name: string, image_url:string}) => (
+            {products.map((product: Product) => (
                 <li className='productList' key={product.id}>
                     <img src= {product.image_url} alt="" />
                     <p id='productName'>{product.name}</p>
                     <button id='productDetail-button'>Product Detail</button>
-                    <button id='addToCart-button' onClick={() => handleCart(product)}>Add to Cart</button>
+                    <button id='addToCart-button' onClick={() => addToCart(product)}>Add to Cart</button>
                 </li>
             ))}
             {/* <li>

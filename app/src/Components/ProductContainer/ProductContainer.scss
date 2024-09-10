@@ -1,7 +1,8 @@
 
 .productContainer {
     display: flex;
-
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .productList {
@@ -45,7 +46,13 @@ img {
     margin-top: 10px;
     border: none;
     border-radius: 10px;
-    transition: transform 0.3s ease ;
+    box-shadow: 0 4px #0056b3;
+    transition: transform 0.3s ease box-shadow 0.1s ease;
+}
+
+#addToCart-button:active {
+   transform: translateY(2px); 
+   box-shadow: 0 2px #0056b3; 
 }
 
 #addToCart-button:hover {

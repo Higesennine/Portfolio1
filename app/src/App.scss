@@ -1,11 +1,28 @@
-
+.App {
+  height: 100%;
+}
 
 .header {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 25px;
+  z-index: 1000;
+
+  &__cartIcon {
+    width: 30px;
+    height: auto;
+  }
+}
+
+main {
+  margin-top: 60px;
 }
 
 .cartButton {
@@ -17,16 +34,15 @@
   }
 }
 
-/* NEXT_PUBLIC_SUPABASE_URL=https://dwpoasnfpbdswanexiyr.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR3cG9hc25mcGJkc3dhbmV4aXlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQyNzIxNTEsImV4cCI6MjAzOTg0ODE1MX0.-2HVXNtyOK_1-9g9wajCG0KWL1cMogkwIY61JlgwxeA */
-
-
 .headerTitle {
   font-size: 30px;
 }
 
 .container {
   position: relative;
+  height: 100%;
+  transition: all 0.5s;
+  padding: 20px;
 }
 
 #searchBox {
@@ -38,4 +54,61 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzd
 #searchBox::placeholder {
   position: relative;
   left: 5px;
+}
+
+.cartList {
+  position: fixed;
+  right: 0;
+  top: 60px;
+  overflow-y: scroll;
+  height: 80%;
+
+  &::-webkit-scrollbar {
+    display:  none;
+  }
+
+  &__main {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__item {
+    list-style-type: none;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.2s;
+    background-color: beige;
+    border-radius: 10px;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    
+    img {
+      width: 100px;
+      height:130px;
+    }
+  }
+
+  &__total {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+}
+
+.cartOpen {
+  & .container {
+    transform: translate(-230px, 60px);
+    box-shadow: 0 8px 40px -10px rgba(0, 0, 0, 0.8);
+  }
+
+  & .cartList {
+    &__item {
+      opacity: 1;
+    }
+
+    &__total {
+      opacity: 1;
+    }
+  }
 }
