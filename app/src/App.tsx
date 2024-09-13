@@ -4,6 +4,8 @@ import ProductContainer from './Components/ProductContainer/ProductContainer';
 import { getAllProducts } from './services/supabaseFunction';
 import Header from './Components/Header';
 import CartList from './Components/CartListComponent/CartList';
+import { ProductProvider } from './contexts/productsContext';
+import { CartProvider } from './contexts/cartContext';
 
 
 //cartの中身をスクロールできるようにstylingしたい
@@ -24,49 +26,21 @@ export type CartProduct = {
 }
 
 function App() {
-
-  const [products, setProducts] = useState<Product[]>([]);
-  useEffect(() => {
-    const getProducts = async () => {
-      const products = await getAllProducts();
-      setProducts(products!);
-      console.log(products);
-    };
-    getProducts();
-  }, [])
-
-  const [currentCart, setCart] = useState<CartProduct[]>([]);
-  const addToCart = (addedProduct: Product) => {
-    const existingProduct = currentCart.find((cartItem) => cartItem.id === addedProduct.id)
-
-    if (existingProduct) {
-      setCart(
-        currentCart.map(cartItem => cartItem.id === addedProduct.id ? { ...cartItem, amount: cartItem.amount + 1 } : cartItem)
-      );
-    } else {
-      setCart([...currentCart, { ...addedProduct, amount: 1 }])
-    }
-  }
-
-  useEffect(() => {
-    console.log("Cart:", currentCart);
-  }, [currentCart]);
-
-  const totalPrice = currentCart.reduce((total, cartItem) => {
-    return total + cartItem.amount * cartItem.price;
-  }, 0);
-
   return (
     <div className="App">
       <Header />
       <main className='main'>
-        <div className='container'>
-          <input type="text" id='searchBox' placeholder='Search Products...' />
-          <ul>
-            <ProductContainer products={products} addToCart={addToCart} />
-          </ul>
-        </div>
-        <CartList currentCart={currentCart} setCart={setCart} totalPrice={totalPrice}/>
+        <ProductProvider>
+          <CartProvider>
+            <div className='container'>
+              <input type="text" id='searchBox' placeholder='Search Products...' />
+              <ul>
+                <ProductContainer />
+              </ul>
+            </div>
+            <CartList  />
+          </CartProvider>
+        </ProductProvider>
       </main>
     </div>
   );

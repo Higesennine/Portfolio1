@@ -1,13 +1,17 @@
 import { Dispatch, SetStateAction } from "react";
 import { CartProduct } from "../../App"
+import { useCart } from "../../contexts/cartContext";
 
-type Props = {
-    currentCart: CartProduct[];
-    setCart: Dispatch<SetStateAction<CartProduct[]>>;
-    totalPrice: number;
-}
+//cotextを使うのでPropsは不要になった
+// type Props = {
+//     currentCart: CartProduct[];
+//     setCart: Dispatch<SetStateAction<CartProduct[]>>;
+//     totalPrice: number;
+// }
 
-export default function CartList({currentCart, setCart, totalPrice}: Props) {
+export default function CartList() {
+  const {currentCart, totalPrice} = useCart();
+
   return (
     <nav className='cartList'>
         <h3 className='cartList__total'>Total Price: ${totalPrice.toFixed(2)}</h3>

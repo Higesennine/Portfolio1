@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './ProductContainer.scss';
 import { Product } from '../../App';
+import { useProducts } from '../../contexts/productsContext';
+import { useCart } from '../../contexts/cartContext';
 
-type Props = {
-    products: Product[],
-    addToCart: (addedProduct: Product) => void
-}
+//contextを使うため、Propsは不要となった
+// type Props = {
+//     products: Product[],
+//     addToCart: (addedProduct: Product) => void
+// }
 
-export default function ProductContainer({products, addToCart}: Props) {
+export default function ProductContainer() {
+    const {products} = useProducts();
+    const {addToCart} = useCart();
 
     return (
         <div className='productContainer'>
