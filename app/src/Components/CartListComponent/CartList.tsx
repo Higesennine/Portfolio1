@@ -26,6 +26,7 @@ export default function CartList() {
         </li>
       ))}
     </ul>
+    
   </nav>
   )
 }
